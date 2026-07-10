@@ -1,0 +1,89 @@
+* {
+    
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+.header {
+    width: 100%;
+    padding: 16px 24px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 16px;
+    width: 100%;
+}
+.signup-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    color: rgb(255, 255, 255);
+}
+.logo {
+    width: 100px;
+    height: auto;
+    margin: 0;
+    background-color: transparent;
+}
+.heading {
+    width: 100%;
+    max-width: 360px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    
+    border-radius: 12px;
+    text-align: center;
+}
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 360px;
+}
+.signup-form label {
+    font-size: 0.9rem;
+}
+.signup-form input {
+    padding: 12px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background: #111;
+    color: #fff;
+}
+.signup-form button {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.signup-form button[type="button"] {
+    background: #444;
+    color: #fff;
+}
+.signup-form button[type="submit"] {
+    background: #06f;
+    color: #fff;
+}
+
+.auth-toggle {
+    margin-top: 12px;
+    color: #ddd;
+    font-size: 0.9rem;
+}
+
+.link-button {
+    background: none;
+    border: none;
+    color: #6cf;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
+}
