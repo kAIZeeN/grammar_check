@@ -25,10 +25,11 @@ const grok = new OpenAI({
   baseURL: "https://api.x.ai/v1",
 });
 
+const MONGO_URI = process.env.MONGO_URI || '';
 
-const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://palomaresrheinwell_db_user:FTjkM62190KtPrl6@cluster0.omovgak.mongodb.net/grammarcheck?retryWrites=true&w=majority';
-
-
+if (!MONGO_URI) {
+  console.error('MONGO_URI is not set. Set it in your environment or in backend/api.env');
+}
 
 mongoose.connect(MONGO_URI, {
   serverSelectionTimeoutMS: 5000,
