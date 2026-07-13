@@ -1,0 +1,9 @@
+{
+  "builds": [
+    {
+      "src": "grammar_check/package.json",
+      "use": "@vercel/static-build"
+    }
+  ],
+  "outputDirectory": "grammar_check/dist"
+}
