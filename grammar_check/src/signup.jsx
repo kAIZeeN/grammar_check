@@ -2,6 +2,8 @@ import { useState } from "react";
 import logo from "./assets/logo.png";
 import "./signup.css";
 
+const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 function Signup({ onLoginSuccess, onSwitchToLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,7 +16,7 @@ function Signup({ onLoginSuccess, onSwitchToLogin }) {
   const handleSignup = async (event) => {
     event.preventDefault();
 
-    const response = await fetch("http://localhost:3000/signup", {
+    const response = await fetch(`${apiUrl}/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

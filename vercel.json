@@ -1,8 +1,23 @@
 {
+  "version": 2,
   "builds": [
     {
       "src": "grammar_check/package.json",
       "use": "@vercel/static-build"
+    },
+    {
+      "src": "grammar_check/api/**/*.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/grammar_check/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/grammar_check/$1"
     }
   ],
   "outputDirectory": "grammar_check/dist"

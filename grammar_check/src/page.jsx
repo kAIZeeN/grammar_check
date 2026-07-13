@@ -2,6 +2,8 @@ import { useState } from "react";
 import logo from "./assets/logo.png";
 import "./page.css";
 
+const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 function Page({ onLogout }) {
   const [inputValue, setInputValue] = useState("");
   const [outputValue, setOutputValue] = useState("");
@@ -12,7 +14,7 @@ function Page({ onLogout }) {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:3000/grammar-check", {
+      const response = await fetch(`${apiUrl}/grammar-check`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
