@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const OpenAI = require("openai");
@@ -12,7 +13,7 @@ app.use(bodyParser.json());
 app.use(express.json());
 let requestCount = 0;
 const MAX_REQUESTS = 999999; // Basically no limit
-require('dotenv').config({ path: 'api.env' });
+dotenv.config({ path: path.join(__dirname, 'api.env') });
 const { GoogleGenAI } = require("@google/genai");
 
 const ai = new GoogleGenAI({
@@ -24,9 +25,13 @@ const grok = new OpenAI({
   baseURL: "https://api.x.ai/v1",
 });
 
-mongoose.connect('mongodb://localhost/grammar_check', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+
+const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://palomaresrheinwell_db_user:FTjkM62190KtPrl6@cluster0.omovgak.mongodb.net/grammarcheck?retryWrites=true&w=majority';
+
+
+
+mongoose.connect(MONGO_URI, {
+  serverSelectionTimeoutMS: 5000,
 })
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.error('MongoDB connection error:', err));

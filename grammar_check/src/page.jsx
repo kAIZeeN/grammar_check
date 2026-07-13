@@ -41,7 +41,7 @@ function Page({ onLogout }) {
 
   return (
     <div className="page-content">
-        <header className="header">
+        <header className="header-page">
           <div className="header-left">
             <img className="logo" src={logo} alt="Logo" />
             <h2>WriteWise</h2>
@@ -52,6 +52,7 @@ function Page({ onLogout }) {
             </button>
           </div>
         </header>
+        <br></br>
       <div className="page-banner">
         <h1>Grammar Checker</h1>
       </div>
