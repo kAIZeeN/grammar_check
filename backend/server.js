@@ -28,14 +28,8 @@ const grok = new OpenAI({
 const MONGO_URI = process.env.MONGO_URI || '';
 
 if (!MONGO_URI) {
-  console.error('MONGO_URI is not set. Set it in your environment or in backend/api.env');
+  throw new Error('MONGO_URI is not set. Configure it in the Render service environment.');
 }
-
-mongoose.connect(MONGO_URI, {
-  serverSelectionTimeoutMS: 5000,
-})
-  .then(() => console.log('Connected to MongoDB'))
-  .catch((err) => console.error('MongoDB connection error:', err));
 
 const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
@@ -43,6 +37,18 @@ const userSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model('User', userSchema);
+
+app.get('/', (req, res) => {
+  res.json({ message: 'Grammar Check API is running' });
+});
+
+app.get('/health', (req, res) => {
+  const databaseConnected = mongoose.connection.readyState === 1;
+  res.status(databaseConnected ? 200 : 503).json({
+    status: databaseConnected ? 'ok' : 'unavailable',
+    database: databaseConnected ? 'connected' : 'disconnected',
+  });
+});
 
 app.post('/signup', async (req, res) => {
   const { email, password } = req.body;
@@ -178,6 +184,20 @@ Text:\n${text}
 
 
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+const PORT = process.env.PORT || 3000;
+
+async function startServer() {
+  await mongoose.connect(MONGO_URI, {
+    serverSelectionTimeoutMS: 10000,
+  });
+  console.log('Connected to MongoDB');
+
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
+
+startServer().catch((error) => {
+  console.error('Failed to start server because MongoDB is unavailable:', error);
+  process.exit(1);
 });
